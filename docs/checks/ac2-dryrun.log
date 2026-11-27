@@ -1,0 +1,28 @@
+# AC2 试抓结果区显示 robots 判定与前 10 条链接
+# 生成方式：npm run shots → node scripts/evidence-logs.mjs
+# 数据来源：shots/dom-evidence.json（Playwright 在截图同一时刻从真实 DOM 读取）
+# 视口：1440x1000，deviceScaleFactor=2
+
+[场景 A：允许]
+route                 = /workbench/intel/sources?role=intel_supervisor&edit=src-009
+robots_allowed        = true
+verdict               = robots 允许抓取
+rule                  = 未命中禁止规则
+count_text            = 共解析 12 条，展示前 10 条
+total_links           = 12
+rendered_links        = 10
+first_link            = https://www.media.example.cn/channel/industry/2026/n001.html
+tenth_link            = https://www.media.example.cn/channel/industry/2026/n010.html
+screenshot            = shots/ac2-dryrun-allowed.png
+
+[场景 B：禁止]
+route                 = /workbench/intel/sources?role=intel_supervisor&edit=src-010
+robots_allowed        = false
+verdict               = robots 禁止抓取
+rule                  = 命中规则：Disallow: /search
+count_text            = 共解析 12 条，展示前 10 条
+rendered_links        = 10
+screenshot            = shots/ac2-dryrun-blocked.png
+
+limit_constant        = DRY_RUN_LINK_LIMIT = 10（src/utils/dry-run-format.ts）
+unit_tests            = tests/dry-run.spec.tsx = 9 用例

@@ -1,0 +1,14 @@
+# AC1 入口地址主机不在允许主机内 → 表单即时报错
+# 生成方式：npm run shots → node scripts/evidence-logs.mjs
+# 数据来源：shots/dom-evidence.json（Playwright 在截图同一时刻从真实 DOM 读取）
+# 视口：1440x1000，deviceScaleFactor=2
+
+route                 = /workbench/intel/sources?role=intel_supervisor&edit=src-001
+entry_value           = https://other.example.cn/daily-notice
+allowed_hosts         = gov.example.cn, www.gov.example.cn
+row_valid             = false
+error_text            = 主机 other.example.cn 不在允许主机内
+submit_disabled       = true
+gate_text             = 表单校验：未通过，保存按钮已禁用（入口地址错误 1 条）
+screenshot            = shots/ac1-entry-url-error.png
+unit_tests            = tests/host-match.spec.ts = 10 用例（npm run verify → docs/checks/02-tests.log）

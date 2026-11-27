@@ -1,0 +1,24 @@
+# AC4 连续失败次数 ≥ 3 的来源在列表中标红
+# 生成方式：npm run shots → node scripts/evidence-logs.mjs
+# 数据来源：shots/dom-evidence.json（Playwright 在截图同一时刻从真实 DOM 读取）
+# 视口：1440x1000，deviceScaleFactor=2
+
+route                 = /workbench/intel/sources?role=intel_supervisor
+threshold             = FAIL_ALERT_THRESHOLD = 3（src/pages/workbench/intel/sources/FailCountCell.tsx）
+alert_color           = rgb(213, 73, 65)  #d54941
+cells_字段含义            = 次数:判定等级:计算后颜色:字重
+  row01 = 0:zero:rgb(148, 163, 184):w400
+  row02 = 2:normal:rgb(15, 23, 42):w400
+  row03 = 3:alert:rgb(213, 73, 65):w700
+  row04 = 7:alert:rgb(213, 73, 65):w700
+  row05 = 0:zero:rgb(148, 163, 184):w400
+  row06 = 1:normal:rgb(15, 23, 42):w400
+  row07 = 5:alert:rgb(213, 73, 65):w700
+  row08 = 2:normal:rgb(15, 23, 42):w400
+  row09 = 0:zero:rgb(148, 163, 184):w400
+  row10 = 3:alert:rgb(213, 73, 65):w700
+  row11 = 0:zero:rgb(148, 163, 184):w400
+  row12 = 6:alert:rgb(213, 73, 65):w700
+screenshot            = shots/ac4-failcount-alert.png
+screenshot_note       = 画面左侧为 2 次（normal，深灰），相邻 3 次与 7 次为红色并带「连续失败」角标
+unit_tests            = tests/fail-count.spec.tsx = 5 用例

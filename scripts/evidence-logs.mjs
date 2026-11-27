@@ -19,7 +19,7 @@ function head(title) {
     "# " + title,
     "# 生成方式：npm run shots → node scripts/evidence-logs.mjs",
     "# 数据来源：shots/dom-evidence.json（Playwright 在截图同一时刻从真实 DOM 读取）",
-    "# 视口：' + dump.viewport.width + 'x' + dump.viewport.height + '，deviceScaleFactor=' + dump.deviceScaleFactor,
+    "# 视口：" + dump.viewport.width + "x" + dump.viewport.height + "，deviceScaleFactor=" + dump.deviceScaleFactor,
     "",
   ].join("\n");
 }
@@ -71,7 +71,7 @@ function head(title) {
     line("screenshot", blocked.file),
     "",
     line("limit_constant", "DRY_RUN_LINK_LIMIT = 10（src/utils/dry-run-format.ts）"),
-    line("unit_tests", "tests/dry-run.spec.tsx = 8 用例"),
+    line("unit_tests", "tests/dry-run.spec.tsx = 9 用例"),
     "",
   ];
   await writeFile(path.join(outDir, "ac2-dryrun.log"), lines.join("\n"), "utf8");
@@ -108,7 +108,7 @@ function head(title) {
     line("route", "/workbench/intel/sources?role=intel_supervisor"),
     line("threshold", "FAIL_ALERT_THRESHOLD = 3（src/pages/workbench/intel/sources/FailCountCell.tsx）"),
     line("alert_color", "rgb(213, 73, 65)  #d54941"),
-    line("cells_count_level_color_weight", ""),
+    line("cells_字段含义", "次数:判定等级:计算后颜色:字重"),
     ...rows.map((row, index) => "  row" + String(index + 1).padStart(2, "0") + " = " + row),
     line("screenshot", shot.file),
     line("screenshot_note", "画面左侧为 2 次（normal，深灰），相邻 3 次与 7 次为红色并带「连续失败」角标"),

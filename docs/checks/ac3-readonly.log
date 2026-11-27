@@ -1,0 +1,16 @@
+# AC3 非主管账号看不到新建与编辑按钮（只读视图）
+# 生成方式：npm run shots → node scripts/evidence-logs.mjs
+# 数据来源：shots/dom-evidence.json（Playwright 在截图同一时刻从真实 DOM 读取）
+# 视口：1440x1000，deviceScaleFactor=2
+
+route                 = /workbench/intel/sources?role=intel_staff&edit=src-003
+role                  = staff
+role_label            = 运营专员
+can_write             = false
+create_buttons        = 0
+edit_buttons          = 0
+drawer_nodes          = 0
+rows_rendered         = 12
+screenshot            = shots/ac3-staff-readonly.png
+note                  = 深链 ?edit=src-003 在只读账号下抽屉节点为 0：不是靠隐藏按钮，是不进编辑分支
+unit_tests            = tests/role-visibility.spec.tsx = 6 用例
