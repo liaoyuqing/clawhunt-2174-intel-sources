@@ -1,0 +1,50 @@
+$ node scripts/verify-shots.mjs
+
+OK   list-full 是 PNG（魔数 89504e470d0a1a0a），字节数 402436
+OK   list-full 字节数 > 20000（实际 402436）
+OK   list-full 控制台错误数 = 0（实际 0）
+OK   ac4-failcount-alert 是 PNG（魔数 89504e470d0a1a0a），字节数 161949
+OK   ac4-failcount-alert 字节数 > 20000（实际 161949）
+OK   ac4-failcount-alert 控制台错误数 = 0（实际 0）
+OK   ac3-staff-readonly 是 PNG（魔数 89504e470d0a1a0a），字节数 378828
+OK   ac3-staff-readonly 字节数 > 20000（实际 378828）
+OK   ac3-staff-readonly 控制台错误数 = 0（实际 0）
+OK   drawer-form 是 PNG（魔数 89504e470d0a1a0a），字节数 416856
+OK   drawer-form 字节数 > 20000（实际 416856）
+OK   drawer-form 控制台错误数 = 0（实际 0）
+OK   ac1-entry-url-error 是 PNG（魔数 89504e470d0a1a0a），字节数 405868
+OK   ac1-entry-url-error 字节数 > 20000（实际 405868）
+OK   ac1-entry-url-error 控制台错误数 = 0（实际 0）
+OK   ac2-dryrun-allowed 是 PNG（魔数 89504e470d0a1a0a），字节数 529513
+OK   ac2-dryrun-allowed 字节数 > 20000（实际 529513）
+OK   ac2-dryrun-allowed 控制台错误数 = 0（实际 0）
+OK   ac2-dryrun-blocked 是 PNG（魔数 89504e470d0a1a0a），字节数 516953
+OK   ac2-dryrun-blocked 字节数 > 20000（实际 516953）
+OK   ac2-dryrun-blocked 控制台错误数 = 0（实际 0）
+OK   列表 12 行（实际 12）
+OK   主管视图编辑按钮 12 个（实际 12）
+OK   主管视图新建按钮 1 个
+OK   AC4：2 次为 normal
+OK   AC4：3 次为 alert，颜色 rgb(213, 73, 65)
+OK   AC4：7 次为 alert
+OK   AC4：3 次颜色为 rgb(213, 73, 65)
+OK   AC3：角色为 staff
+OK   AC3：data-can-write=false
+OK   AC3：新建按钮 0 个
+OK   AC3：编辑按钮 0 个
+OK   AC3：深链 ?edit=src-003 抽屉节点 0 个
+OK   AC3：列表仍渲染 12 行
+OK   AC1：行内错误文案含「不在允许主机内」：主机 other.example.cn 不在允许主机内
+OK   AC1：该行 data-entry-valid=false
+OK   AC1：保存按钮被禁用
+OK   AC2（允许）：data-robots-allowed=true
+OK   AC2（允许）：计数文案「共解析 12 条，展示前 10 条」
+OK   AC2（允许）：渲染 10 条链接（实际 10）
+OK   AC2（禁止）：data-robots-allowed=false
+OK   AC2（禁止）：命中规则 Disallow: /search：命中规则：Disallow: /search
+OK   AC2（禁止）：同样只渲染 10 条
+SHOTS=7 FAILED=0
+VERIFY_SHOTS=PASS
+
+
+EXIT=0

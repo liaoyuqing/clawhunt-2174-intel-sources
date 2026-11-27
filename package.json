@@ -12,8 +12,11 @@
     "test": "vitest",
     "test:run": "vitest run",
     "shots": "node scripts/screenshot.mjs",
+    "verify:shots": "node scripts/verify-shots.mjs",
+    "evidence:shots": "node scripts/evidence-shots.mjs",
+    "evidence": "node scripts/evidence-logs.mjs",
     "verify": "node scripts/verify.mjs",
-    "verify:all": "node scripts/verify-all.mjs"
+    "verify:all": "npm run verify && npm run evidence:shots"
   },
   "dependencies": {
     "react": "18.3.1",

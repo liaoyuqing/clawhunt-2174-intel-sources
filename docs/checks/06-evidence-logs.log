@@ -1,0 +1,6 @@
+$ node scripts/evidence-logs.mjs
+
+WROTE ac1-entry-url.log / ac2-dryrun.log / ac3-readonly.log / ac4-failcount.log
+
+
+EXIT=0

@@ -40,10 +40,13 @@ npm run test:run
 npm run build && npm run preview
 # 预期输出：➜  Local:  http://localhost:4194/
 
-# 6) 截图 + 自检（见第四节）
-npm run shots && npm run verify:shots
-# 预期输出：SHOT list-full rows=12 ... / WROTE <repo>/shots
-#           SHOTS=7 FAILED=0 / VERIFY_SHOTS=PASS
+# 6) 截图 + 自检（见第四节；需先 build && preview）
+npm run evidence:shots
+# 预期输出：
+#   [04-shots.log] EXIT=0  WROTE <repo>/shots
+#   [05-verify-shots.log] EXIT=0  VERIFY_SHOTS=PASS
+#   [06-evidence-logs.log] EXIT=0  WROTE ac1-entry-url.log / ac2-dryrun.log / ...
+# 分步跑：npm run shots → npm run verify:shots → npm run evidence
 ```
 
 一条命令的等价形式：`npm run verify` = `npx tsc --noEmit` → `npx vitest run --reporter=verbose` → `npx vite build`，每步原始输出写进 `docs/checks/01-typecheck.log`、`02-tests.log`、`03-build.log`，每份日志末行是 `EXIT=...`。

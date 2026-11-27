@@ -1,0 +1,13 @@
+$ node scripts/screenshot.mjs
+
+SHOT list-full rows=12 editButtons=12 errors=0
+SHOT ac4-failcount-alert cells=["0:zero","2:normal","3:alert","7:alert","0:zero","1:normal","5:alert","2:normal","0:zero","3:alert","0:zero","6:alert"]
+SHOT ac3-staff-readonly {"role":"staff","canWrite":"false","createButtons":0,"editButtons":0,"drawerNodes":0,"rows":12,"roleLabel":"运营专员"}
+SHOT drawer-form {"mode":"edit","selectorStatus":"JSON 合法，共 3 个选择器键","hosts":["gov.example.cn","www.gov.example.cn"],"frequency":"1 小时","submitDisabled":false}
+SHOT ac1-entry-url-error {"errorText":"主机 other.example.cn 不在允许主机内","rowValid":"false","submitDisabled":true,"gateText":"表单校验：未通过，保存按钮已禁用（入口地址错误 1 条）"}
+SHOT ac2-dryrun-allowed {"allowed":"true","verdict":"robots 允许抓取","rule":"未命中禁止规则","count":"共解析 12 条，展示前 10 条","totalLinks":"12","renderedLinks":10,"firstLink":"https://www.media.example.cn/channel/industry/2026/n001.html","lastRenderedLink":"https://www.media.example.cn/channel/industry/2026/n010.html"}
+SHOT ac2-dryrun-blocked {"allowed":"false","verdict":"robots 禁止抓取","rule":"命中规则：Disallow: /search","count":"共解析 12 条，展示前 10 条","renderedLinks":10}
+WROTE E:\AI接单\Clawhunt\delivery\work\2174\repo\shots
+
+
+EXIT=0
