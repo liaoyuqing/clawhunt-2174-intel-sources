@@ -28,13 +28,13 @@ npm run dev
 npm run verify
 # 预期输出（逐行，末行固定）：
 #   [01-typecheck] EXIT=0 3.8s
-#   [02-tests] EXIT=0 28.9s  Tests  48 passed (48) | ...
+#   [02-tests] EXIT=0 31.8s  Tests  50 passed (50) | ...
 #   [03-build] EXIT=0 29.6s  ✓ built in 27.45s
 #   VERIFY=PASS
 
 # 4) 单独跑测试
 npm run test:run
-# 预期输出：Test Files  7 passed (7) / Tests  48 passed (48)，Exit code 0
+# 预期输出：Test Files  7 passed (7) / Tests  50 passed (50)，Exit code 0
 
 # 5) 生产构建 + 预览（截图用构建产物）
 npm run build && npm run preview
@@ -53,14 +53,28 @@ npm run evidence:shots
 
 ## 二、路由与角色开关
 
+### 2.1 角色从哪来（地址栏不是权限来源）
+
+生效角色由**会话**决定，不由地址栏决定。实现分两处：
+
+- `src/services/session.ts`：`loadSession()` 返回当前账号会话 `{ id, name, role }`。本单没有后端，返回固定 mock 会话（`{ id: "u-demo-01", name: "演示账号", role: "supervisor" }`）；真实部署把函数体换成 `SESSION_API = "GET /api/v1/auth/me"` 的响应即可，页面其余代码一行不用改。
+- `src/hooks/useIntelRole.ts` 的 `resolveEffectiveRole(sessionRole, requestedRole)`：会话角色是 `staff` 时**恒返回 `staff`**，只有会话本身是 `supervisor` 时才采用地址栏请求的 `staff`。也就是说地址栏只能把主管**降级**成只读视图（用于演示/评审），**不能把只读账号提权**。
+
+页面根节点同时暴露 `data-session-role`（会话给的）与 `data-role`（最终生效的）两个属性，`npm run shots` 把两者一起读进证据，所以「降级生效、提权无效」是可机器核对的，而不是一句声明。
+
+只读视图是**界面便利，不是安全边界**：真实部署里所有写接口必须在服务端按会话角色再校验一次（本单无后端，故只有前端这一层演示逻辑）。
+
+### 2.2 路由参数
+
 | 地址 | 作用 |
 | --- | --- |
-| `/workbench/intel/sources` | 主管视图（默认）：新建按钮 1 个，每行 1 个「编辑」按钮 |
-| `/workbench/intel/sources?role=intel_staff` | 非主管只读视图：新建与编辑按钮都不渲染，列表照常可看 |
-| `/workbench/intel/sources?edit=src-003` | 深链编辑（仅主管生效；只读账号下该参数被忽略，抽屉节点数为 0） |
+| `/workbench/intel/sources` | 会话为主管时的默认视图：新建按钮 1 个，每行 1 个「编辑」按钮 |
+| `/workbench/intel/sources?role=intel_staff` | 请求只读视图：会话为主管时降级生效，新建与编辑按钮都不渲染，列表照常可看 |
+| `/workbench/intel/sources?role=intel_supervisor` | 对只读会话**无效**：仍渲染只读视图，`data-role` 仍是 `staff` |
+| `/workbench/intel/sources?edit=src-003` | 深链编辑（仅生效角色为主管时有效；只读时该参数被忽略，抽屉节点数为 0） |
 | `/workbench/intel/sources?...&mock=dry-run-blocked` | 试抓样例开关（也接受 `allowed`），等价于把入口主机改成 `biz.example.cn` |
 
-角色参数解析在 `src/hooks/useIntelRole.ts`：接受 `intel_supervisor` / `supervisor` / `intel_staff` / `staff`（大小写不敏感），**未知值回落主管**，缺省为主管。
+`?role=` 接受 `intel_supervisor` / `supervisor` / `intel_staff` / `staff`（大小写不敏感），**未知值回落主管**，缺省为主管。单元测试 `tests/role-visibility.spec.tsx` 里有专门一条「会话 staff + 地址栏 supervisor」的反向用例：`create-source` 节点数 0、`edit-src-*` 节点数 0、抽屉节点 null、`data-session-role` 仍为 `staff`。
 
 ## 三、允许主机的匹配口径（AC1 的判定根基）
 
@@ -101,7 +115,7 @@ npm run verify:shots
 src/
   App.tsx / main.tsx                                 路由（/workbench/intel/sources）与入口
   pages/workbench/intel/sources/
-    index.tsx                                        页面容器：取数、筛选、角色、抽屉与试抓编排
+    index.tsx                                        页面容器：取数、筛选、会话角色、抽屉与试抓编排
     SourceTable.tsx                                  9 列列表 + 行内编辑按钮（SOURCE_TABLE_COLUMNS 常量）
     FailCountCell.tsx                                FAIL_ALERT_THRESHOLD = 3，data-fail-level + 内联色双通道
     Filters.tsx                                      类型 / 状态 / 地区层级三档筛选
@@ -116,12 +130,13 @@ src/
     dry-run-format.ts                                DRY_RUN_LINK_LIMIT = 10 与结果摘要
     draft-validate.ts                                表单闸门（必填 + 逐条入口 + 公开信息勾选）
     source-filter.ts                                 三维度组合筛选（纯函数）
-  hooks/useIntelRole.ts                              ?role= 解析与 canWrite
+  hooks/useIntelRole.ts                              会话角色 × ?role= 求交（只降级不提权）与 canWrite
+  services/session.ts                               会话来源（mock；对接点 GET /api/v1/auth/me）
   services/sources.ts                                mock 取数 / 保存 / 试抓（含真实接口对接点）
   services/mock/*.json                               12 条来源、试抓允许/禁止样例、选择器样例
   constants/intel-options.ts                         类型 / 地区层级 / 频率 / 抓取方式 / 状态选项
   types/source.ts                                    领域类型
-tests/                                              7 个 spec（见第六节）
+tests/                                              7 个 spec 50 用例（见第六节）
 scripts/verify.mjs                                   tsc → vitest → vite build，日志落 docs/checks/
 scripts/screenshot.mjs                               Playwright 7 张截图 + DOM 证据
 scripts/verify-shots.mjs                             截图与数值自检（末行 VERIFY_SHOTS=PASS）
@@ -130,7 +145,7 @@ shots/                                               7 张 PNG + dom-evidence.js
 docs/checks/                                         真实命令输出与 AC 三元组日志
 ```
 
-## 六、测试覆盖（7 文件 48 用例）
+## 六、测试覆盖（7 文件 50 用例）
 
 | 文件 | 用例 | 覆盖点 |
 | --- | --- | --- |
@@ -138,11 +153,11 @@ docs/checks/                                         真实命令输出与 AC �
 | `tests/json-validate.spec.ts` | 6 | 空串合法、对象键数、语法错误行列（第 3 行）、数组/字符串/数字/null 拒绝、非字符串值拒绝、行列换算 |
 | `tests/dry-run.spec.tsx` | 9 | AC2：摘要纯函数（12→10、文案、禁止规则）、场景路由、?mock= 强制样例、允许场景 UI、禁止场景 UI、链接 target/rel、试抓前后状态、DOM 三元组 |
 | `tests/fail-count.spec.tsx` | 5 | AC4：阈值常量、2/3/7 边界、data-fail-level 与颜色双通道、0 灰、列表内 3 与 2 并排、disabled 叠加 |
-| `tests/role-visibility.spec.tsx` | 6 | AC3：staff 下 0 按钮且列表仍渲染、supervisor 下 1+12、深链 ?edit= 被忽略、只读无试抓面板、supervisor 对照组、参数解析 |
+| `tests/role-visibility.spec.tsx` | 8 | AC3：staff 下 0 按钮且列表仍渲染、supervisor 下 1+12、深链 ?edit= 被忽略、只读无试抓面板、supervisor 对照组、**防提权**（会话 staff + 地址栏 supervisor 仍只读）、`resolveEffectiveRole` 四种组合、参数解析 |
 | `tests/form-gate.spec.tsx` | 7 | 入口失配即报错 + 按钮禁用 + 改回恢复、多条逐条定位、公开信息必勾、标签输入增删与去重、频率四档、纯函数闸门、选择器折叠与非法 JSON |
 | `tests/filters.spec.tsx` | 5 | 9 列表头逐字、三维度组合筛选、界面切换筛选与计数、从未成功、12 条虚构数据覆盖三类型 |
 
-用例数取值来源：`docs/checks/02-tests.log` 末行区（`Tests  48 passed (48)`）。
+用例数取值来源：`docs/checks/02-tests.log` 末行区（`Tests  50 passed (50)`）。
 
 ## 七、与真实后端的对接点
 

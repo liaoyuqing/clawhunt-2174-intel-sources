@@ -58,7 +58,8 @@ check(cellMap.get("7")?.level === "alert", "AC4：7 次为 alert");
 check(cellMap.get("3")?.color === "rgb(213, 73, 65)", "AC4：3 次颜色为 rgb(213, 73, 65)");
 
 const ac3 = byName.get("ac3-staff-readonly");
-check(ac3?.state.role === "staff", "AC3：角色为 staff");
+check(ac3?.state.role === "staff", "AC3：生效角色为 staff");
+check(ac3?.state.sessionRole === "supervisor", "AC3：会话角色 supervisor 被地址栏降级为 staff（?role=intel_staff）");
 check(ac3?.state.canWrite === "false", "AC3：data-can-write=false");
 check(ac3?.state.createButtons === 0, "AC3：新建按钮 0 个");
 check(ac3?.state.editButtons === 0, "AC3：编辑按钮 0 个");

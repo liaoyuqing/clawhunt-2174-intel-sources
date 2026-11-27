@@ -21,6 +21,15 @@ export function parseRoleParam(raw: string | null | undefined): IntelRole {
   return "supervisor";
 }
 
+/**
+ * 生效角色 = 会话角色与地址栏请求角色的交集（只能降级，不能提权）。
+ * 会话是 staff 时，地址栏写什么都是 staff —— 这是防提权的唯一入口。
+ */
+export function resolveEffectiveRole(sessionRole: IntelRole, requestedRole: IntelRole): IntelRole {
+  if (sessionRole === "staff") return "staff";
+  return requestedRole;
+}
+
 export function buildRoleState(role: IntelRole): IntelRoleState {
   const isSupervisor = role === "supervisor";
   return {

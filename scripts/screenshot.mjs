@@ -107,6 +107,8 @@ async function scrollDrawerTo(page, testId) {
   const file = await shot(page, "ac3-staff-readonly", { fullPage: true });
   const state = {
     role: await page.getAttribute('[data-testid="intel-sources-page"]', "data-role"),
+    sessionRole: await page.getAttribute('[data-testid="intel-sources-page"]', "data-session-role"),
+    requestedRole: "intel_staff",
     canWrite: await page.getAttribute('[data-testid="intel-sources-page"]', "data-can-write"),
     createButtons: await page.locator('[data-testid="create-source"]').count(),
     editButtons: await page.locator('[data-testid^="edit-src-"]').count(),

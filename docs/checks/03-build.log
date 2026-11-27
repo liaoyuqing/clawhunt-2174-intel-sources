@@ -2,17 +2,17 @@ $ npx vite build
 
 vite v7.3.8 building client environment for production...
 transforming...
-✓ 3924 modules transformed.
+✓ 3925 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                     0.65 kB │ gzip:  0.36 kB
 dist/assets/index-HhMc8CDu.css     21.90 kB │ gzip:  4.18 kB
 dist/assets/tdesign-DWc1kX4G.css  516.70 kB │ gzip: 53.12 kB
-dist/assets/index-t1LA2gh-.js      31.96 kB │ gzip: 10.25 kB
+dist/assets/index-BngqGjrJ.js      32.45 kB │ gzip: 10.38 kB
 dist/assets/react-BnHN6n1P.js     181.27 kB │ gzip: 59.84 kB
 dist/assets/tdesign-rV6A9tiV.js   267.93 kB │ gzip: 84.53 kB
-✓ built in 25.21s
+✓ built in 26.14s
 
 
 
-EXIT=0  DURATION=27.4s
+EXIT=0  DURATION=28.6s

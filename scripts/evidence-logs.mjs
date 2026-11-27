@@ -84,7 +84,9 @@ function head(title) {
   const lines = [
     head("AC3 非主管账号看不到新建与编辑按钮（只读视图）"),
     line("route", "/workbench/intel/sources?role=intel_staff&edit=src-003"),
-    line("role", state.role),
+    line("session_role", state.sessionRole),
+    line("requested_role", state.requestedRole),
+    line("effective_role", state.role),
     line("role_label", state.roleLabel),
     line("can_write", state.canWrite),
     line("create_buttons", state.createButtons),
@@ -93,7 +95,8 @@ function head(title) {
     line("rows_rendered", state.rows),
     line("screenshot", shot.file),
     line("note", "深链 ?edit=src-003 在只读账号下抽屉节点为 0：不是靠隐藏按钮，是不进编辑分支"),
-    line("unit_tests", "tests/role-visibility.spec.tsx = 6 用例"),
+    line("unit_tests", "tests/role-visibility.spec.tsx = 8 用例"),
+    line("anti_escalation", "会话 staff 时地址栏拼 ?role=intel_supervisor 仍为只读（单元测试断言 data-session-role=staff 且新建/编辑/抽屉均 0）"),
     "",
   ];
   await writeFile(path.join(outDir, "ac3-readonly.log"), lines.join("\n"), "utf8");

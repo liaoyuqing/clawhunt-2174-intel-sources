@@ -121,6 +121,8 @@
       "url": "http://localhost:4194/workbench/intel/sources?role=intel_staff&edit=src-003",
       "state": {
         "role": "staff",
+        "sessionRole": "supervisor",
+        "requestedRole": "intel_staff",
         "canWrite": "false",
         "createButtons": 0,
         "editButtons": 0,

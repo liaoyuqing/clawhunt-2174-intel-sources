@@ -4,7 +4,9 @@
 # 视口：1440x1000，deviceScaleFactor=2
 
 route                 = /workbench/intel/sources?role=intel_staff&edit=src-003
-role                  = staff
+session_role          = supervisor
+requested_role        = intel_staff
+effective_role        = staff
 role_label            = 运营专员
 can_write             = false
 create_buttons        = 0
@@ -13,4 +15,5 @@ drawer_nodes          = 0
 rows_rendered         = 12
 screenshot            = shots/ac3-staff-readonly.png
 note                  = 深链 ?edit=src-003 在只读账号下抽屉节点为 0：不是靠隐藏按钮，是不进编辑分支
-unit_tests            = tests/role-visibility.spec.tsx = 6 用例
+unit_tests            = tests/role-visibility.spec.tsx = 8 用例
+anti_escalation       = 会话 staff 时地址栏拼 ?role=intel_supervisor 仍为只读（单元测试断言 data-session-role=staff 且新建/编辑/抽屉均 0）

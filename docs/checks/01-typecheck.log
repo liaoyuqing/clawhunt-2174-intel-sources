@@ -3,4 +3,4 @@ $ npx tsc --noEmit
 
 
 
-EXIT=0  DURATION=4.0s
+EXIT=0  DURATION=4.1s

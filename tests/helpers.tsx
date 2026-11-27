@@ -3,6 +3,7 @@ import { render, screen, within, type RenderResult } from "@testing-library/reac
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { IntelSourcesPage } from "../src/pages/workbench/intel/sources";
+import type { IntelRole } from "../src/types/source";
 import { cloneSources } from "../src/services/sources";
 
 export const SAMPLE_ROWS = cloneSources();
@@ -11,8 +12,8 @@ export function renderPage(route = "/workbench/intel/sources", ui?: ReactElement
   return render(<MemoryRouter initialEntries={[route]}>{ui ?? <IntelSourcesPage />}</MemoryRouter>);
 }
 
-export async function renderPageReady(route = "/workbench/intel/sources"): Promise<RenderResult> {
-  const result = renderPage(route);
+export async function renderPageReady(route = "/workbench/intel/sources", sessionRole?: IntelRole): Promise<RenderResult> {
+  const result = renderPage(route, <IntelSourcesPage roleOverride={sessionRole} />);
   await screen.findByTestId("source-table");
   return result;
 }

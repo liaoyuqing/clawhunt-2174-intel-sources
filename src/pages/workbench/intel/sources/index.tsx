@@ -2,26 +2,41 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button, MessagePlugin } from "tdesign-react";
 import { fetchSources, emptyDraft, resolveDryRunScenario, runDryRun, toDraft, draftToSource } from "../../../../services/sources";
-import { buildRoleState, parseRoleParam } from "../../../../hooks/useIntelRole";
+import { loadSession } from "../../../../services/session";
+import { buildRoleState, parseRoleParam, resolveEffectiveRole } from "../../../../hooks/useIntelRole";
 import { EMPTY_FILTERS, filterSources } from "../../../../utils/source-filter";
 import { validateDraft } from "../../../../utils/draft-validate";
-import type { DryRunResult, IntelSource, SourceDraft, SourceFilters } from "../../../../types/source";
+import type { DryRunResult, IntelRole, IntelSource, SourceDraft, SourceFilters } from "../../../../types/source";
 import { Filters } from "./Filters";
 import { SourceDrawer } from "./SourceDrawer";
 import { SourceTable } from "./SourceTable";
 
 export interface IntelSourcesPageProps {
-  /** 单元测试可注入固定角色；不传则从 ?role= 解析。 */
+  /** 单元测试可注入固定会话角色；不传则读 mock 会话（services/session.ts）。 */
   roleOverride?: "supervisor" | "staff";
   initialFilters?: SourceFilters;
 }
 
 export function IntelSourcesPage({ roleOverride, initialFilters }: IntelSourcesPageProps) {
   const [params, setParams] = useSearchParams();
-  const roleState = useMemo(() => {
-    if (roleOverride) return buildRoleState(roleOverride);
-    return buildRoleState(parseRoleParam(params.get("role")));
-  }, [params, roleOverride]);
+  const [sessionRole, setSessionRole] = useState<IntelRole | null>(roleOverride ?? null);
+
+  useEffect(() => {
+    if (roleOverride) return;
+    let cancelled = false;
+    loadSession().then((session) => {
+      if (!cancelled) setSessionRole(session.role);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [roleOverride]);
+
+  // 生效角色由会话决定，地址栏只能把它降级（例如演示只读视图），不能提权。
+  const roleState = useMemo(
+    () => buildRoleState(resolveEffectiveRole(sessionRole ?? "staff", parseRoleParam(params.get("role")))),
+    [params, sessionRole],
+  );
 
   const [rows, setRows] = useState<IntelSource[]>([]);
   const [loading, setLoading] = useState(true);
@@ -119,8 +134,22 @@ export function IntelSourcesPage({ roleOverride, initialFilters }: IntelSourcesP
     }
   }
 
+  if (sessionRole === null) {
+    return (
+      <main className="page" data-testid="intel-sources-page" data-session="loading">
+        <p data-testid="session-loading">正在读取当前账号会话…</p>
+      </main>
+    );
+  }
+
   return (
-    <main className="page" data-testid="intel-sources-page" data-role={roleState.role} data-can-write={roleState.canWrite ? "true" : "false"}>
+    <main
+      className="page"
+      data-testid="intel-sources-page"
+      data-role={roleState.role}
+      data-session-role={sessionRole}
+      data-can-write={roleState.canWrite ? "true" : "false"}
+    >
       <header className="page-head">
         <div>
           <h1 className="page-title" data-testid="page-title">
