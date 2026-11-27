@@ -1,0 +1,191 @@
+{
+  "baseUrl": "http://localhost:4194",
+  "route": "/workbench/intel/sources",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 2,
+  "shots": [
+    {
+      "name": "list-full",
+      "file": "shots/list-full.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor",
+      "rows": [
+        "src-001",
+        "src-002",
+        "src-003",
+        "src-004",
+        "src-005",
+        "src-006",
+        "src-007",
+        "src-008",
+        "src-009",
+        "src-010",
+        "src-011",
+        "src-012"
+      ],
+      "createButton": 1,
+      "editButtons": 12,
+      "consoleErrors": []
+    },
+    {
+      "name": "ac4-failcount-alert",
+      "file": "shots/ac4-failcount-alert.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor",
+      "clip": {
+        "x": 0,
+        "y": 177.171875,
+        "width": 1440,
+        "height": 281
+      },
+      "cells": [
+        {
+          "count": "0",
+          "level": "zero",
+          "color": "rgb(148, 163, 184)",
+          "weight": "400"
+        },
+        {
+          "count": "2",
+          "level": "normal",
+          "color": "rgb(15, 23, 42)",
+          "weight": "400"
+        },
+        {
+          "count": "3",
+          "level": "alert",
+          "color": "rgb(213, 73, 65)",
+          "weight": "700"
+        },
+        {
+          "count": "7",
+          "level": "alert",
+          "color": "rgb(213, 73, 65)",
+          "weight": "700"
+        },
+        {
+          "count": "0",
+          "level": "zero",
+          "color": "rgb(148, 163, 184)",
+          "weight": "400"
+        },
+        {
+          "count": "1",
+          "level": "normal",
+          "color": "rgb(15, 23, 42)",
+          "weight": "400"
+        },
+        {
+          "count": "5",
+          "level": "alert",
+          "color": "rgb(213, 73, 65)",
+          "weight": "700"
+        },
+        {
+          "count": "2",
+          "level": "normal",
+          "color": "rgb(15, 23, 42)",
+          "weight": "400"
+        },
+        {
+          "count": "0",
+          "level": "zero",
+          "color": "rgb(148, 163, 184)",
+          "weight": "400"
+        },
+        {
+          "count": "3",
+          "level": "alert",
+          "color": "rgb(213, 73, 65)",
+          "weight": "700"
+        },
+        {
+          "count": "0",
+          "level": "zero",
+          "color": "rgb(148, 163, 184)",
+          "weight": "400"
+        },
+        {
+          "count": "6",
+          "level": "alert",
+          "color": "rgb(213, 73, 65)",
+          "weight": "700"
+        }
+      ],
+      "consoleErrors": []
+    },
+    {
+      "name": "ac3-staff-readonly",
+      "file": "shots/ac3-staff-readonly.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_staff&edit=src-003",
+      "state": {
+        "role": "staff",
+        "canWrite": "false",
+        "createButtons": 0,
+        "editButtons": 0,
+        "drawerNodes": 0,
+        "rows": 12,
+        "roleLabel": "运营专员"
+      },
+      "consoleErrors": []
+    },
+    {
+      "name": "drawer-form",
+      "file": "shots/drawer-form.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor&edit=src-001",
+      "state": {
+        "mode": "edit",
+        "selectorStatus": "JSON 合法，共 3 个选择器键",
+        "hosts": [
+          "gov.example.cn",
+          "www.gov.example.cn"
+        ],
+        "frequency": "1 小时",
+        "submitDisabled": false
+      },
+      "consoleErrors": []
+    },
+    {
+      "name": "ac1-entry-url-error",
+      "file": "shots/ac1-entry-url-error.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor&edit=src-001",
+      "state": {
+        "errorText": "主机 other.example.cn 不在允许主机内",
+        "rowValid": "false",
+        "submitDisabled": true,
+        "gateText": "表单校验：未通过，保存按钮已禁用（入口地址错误 1 条）"
+      },
+      "consoleErrors": []
+    },
+    {
+      "name": "ac2-dryrun-allowed",
+      "file": "shots/ac2-dryrun-allowed.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor&edit=src-009",
+      "state": {
+        "allowed": "true",
+        "verdict": "robots 允许抓取",
+        "rule": "未命中禁止规则",
+        "count": "共解析 12 条，展示前 10 条",
+        "totalLinks": "12",
+        "renderedLinks": 10,
+        "firstLink": "https://www.media.example.cn/channel/industry/2026/n001.html",
+        "lastRenderedLink": "https://www.media.example.cn/channel/industry/2026/n010.html"
+      },
+      "consoleErrors": []
+    },
+    {
+      "name": "ac2-dryrun-blocked",
+      "file": "shots/ac2-dryrun-blocked.png",
+      "url": "http://localhost:4194/workbench/intel/sources?role=intel_supervisor&edit=src-010",
+      "state": {
+        "allowed": "false",
+        "verdict": "robots 禁止抓取",
+        "rule": "命中规则：Disallow: /search",
+        "count": "共解析 12 条，展示前 10 条",
+        "renderedLinks": 10
+      },
+      "consoleErrors": []
+    }
+  ]
+}

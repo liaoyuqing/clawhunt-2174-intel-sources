@@ -1,0 +1,270 @@
+[
+  {
+    "id": "src-001",
+    "name": "政务公开信息门户",
+    "type": "gov",
+    "rootDomain": "gov.example.cn",
+    "allowedHosts": [
+      "gov.example.cn",
+      "www.gov.example.cn"
+    ],
+    "entryUrls": [
+      "https://www.gov.example.cn/notice/index.html"
+    ],
+    "fetchMode": "list",
+    "selectors": {
+      "list": "ul.news-list li",
+      "title": "a",
+      "date": "span.date"
+    },
+    "frequency": "hourly",
+    "regionLevel": "country",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 09:12:00",
+    "failCount": 0,
+    "owner": "林澄",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-002",
+    "name": "东岭省产业政策发布厅",
+    "type": "gov",
+    "rootDomain": "dongling.gov.example.cn",
+    "allowedHosts": [
+      "dongling.gov.example.cn"
+    ],
+    "entryUrls": [
+      "https://dongling.gov.example.cn/zcfg/",
+      "https://dongling.gov.example.cn/tzgg/"
+    ],
+    "fetchMode": "list",
+    "selectors": null,
+    "frequency": "6h",
+    "regionLevel": "province",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 07:40:00",
+    "failCount": 2,
+    "owner": "周砚",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-003",
+    "name": "云溪市招商服务网",
+    "type": "gov",
+    "rootDomain": "yunxi.gov.example.cn",
+    "allowedHosts": [
+      "yunxi.gov.example.cn"
+    ],
+    "entryUrls": [
+      "https://yunxi.gov.example.cn/zsdt/"
+    ],
+    "fetchMode": "rss",
+    "selectors": null,
+    "frequency": "daily",
+    "regionLevel": "city",
+    "status": "paused",
+    "lastSuccessAt": "2026-11-20 18:05:00",
+    "failCount": 3,
+    "owner": "周砚",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-004",
+    "name": "青浦区政务公开专栏",
+    "type": "gov",
+    "rootDomain": "qingpu.gov.example.cn",
+    "allowedHosts": [
+      "qingpu.gov.example.cn"
+    ],
+    "entryUrls": [
+      "https://qingpu.gov.example.cn/gk/"
+    ],
+    "fetchMode": "list",
+    "selectors": null,
+    "frequency": "weekly",
+    "regionLevel": "district",
+    "status": "active",
+    "lastSuccessAt": null,
+    "failCount": 7,
+    "owner": "宋芃",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-005",
+    "name": "区域产业协会联合会",
+    "type": "association",
+    "rootDomain": "assoc.example.cn",
+    "allowedHosts": [
+      "assoc.example.cn",
+      "*.assoc.example.cn"
+    ],
+    "entryUrls": [
+      "https://news.assoc.example.cn/industry/"
+    ],
+    "fetchMode": "list",
+    "selectors": {
+      "list": "div.article-item",
+      "title": "h3 a",
+      "date": "time"
+    },
+    "frequency": "6h",
+    "regionLevel": "country",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 06:30:00",
+    "failCount": 0,
+    "owner": "林澄",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-006",
+    "name": "智能制造行业协会",
+    "type": "association",
+    "rootDomain": "im.example.cn",
+    "allowedHosts": [
+      "im.example.cn"
+    ],
+    "entryUrls": [
+      "https://im.example.cn/news"
+    ],
+    "fetchMode": "rss",
+    "selectors": null,
+    "frequency": "hourly",
+    "regionLevel": "province",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 08:55:00",
+    "failCount": 1,
+    "owner": "宋芃",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-007",
+    "name": "现代服务业促进会",
+    "type": "association",
+    "rootDomain": "service.example.cn",
+    "allowedHosts": [
+      "service.example.cn"
+    ],
+    "entryUrls": [
+      "https://service.example.cn/bulletin"
+    ],
+    "fetchMode": "list",
+    "selectors": null,
+    "frequency": "daily",
+    "regionLevel": "city",
+    "status": "disabled",
+    "lastSuccessAt": "2026-10-31 11:22:00",
+    "failCount": 5,
+    "owner": "何岚",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-008",
+    "name": "园区企业联合会",
+    "type": "association",
+    "rootDomain": "park.example.cn",
+    "allowedHosts": [
+      "park.example.cn"
+    ],
+    "entryUrls": [
+      "https://park.example.cn/notice"
+    ],
+    "fetchMode": "list",
+    "selectors": null,
+    "frequency": "weekly",
+    "regionLevel": "district",
+    "status": "paused",
+    "lastSuccessAt": "2026-11-18 16:10:00",
+    "failCount": 2,
+    "owner": "何岚",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-009",
+    "name": "产业观察周报",
+    "type": "media",
+    "rootDomain": "media.example.cn",
+    "allowedHosts": [
+      "media.example.cn",
+      "www.media.example.cn"
+    ],
+    "entryUrls": [
+      "https://www.media.example.cn/channel/industry"
+    ],
+    "fetchMode": "list",
+    "selectors": {
+      "list": ".feed > li",
+      "title": "a.title",
+      "date": "span.time"
+    },
+    "frequency": "hourly",
+    "regionLevel": "country",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 09:30:00",
+    "failCount": 0,
+    "owner": "林澄",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-010",
+    "name": "财经快讯网",
+    "type": "media",
+    "rootDomain": "biz.example.cn",
+    "allowedHosts": [
+      "biz.example.cn"
+    ],
+    "entryUrls": [
+      "https://biz.example.cn/rss.xml"
+    ],
+    "fetchMode": "rss",
+    "selectors": null,
+    "frequency": "6h",
+    "regionLevel": "province",
+    "status": "active",
+    "lastSuccessAt": "2026-11-27 05:15:00",
+    "failCount": 3,
+    "owner": "周砚",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-011",
+    "name": "城市财经日报",
+    "type": "media",
+    "rootDomain": "citybiz.example.cn",
+    "allowedHosts": [
+      "citybiz.example.cn"
+    ],
+    "entryUrls": [
+      "https://citybiz.example.cn/local"
+    ],
+    "fetchMode": "list",
+    "selectors": null,
+    "frequency": "daily",
+    "regionLevel": "city",
+    "status": "active",
+    "lastSuccessAt": "2026-11-26 21:00:00",
+    "failCount": 0,
+    "owner": "宋芃",
+    "publicOnlyConfirmed": true
+  },
+  {
+    "id": "src-012",
+    "name": "新经济观察站",
+    "type": "media",
+    "rootDomain": "newecon.example.cn",
+    "allowedHosts": [
+      "newecon.example.cn"
+    ],
+    "entryUrls": [
+      "https://newecon.example.cn/feed"
+    ],
+    "fetchMode": "rss",
+    "selectors": null,
+    "frequency": "weekly",
+    "regionLevel": "district",
+    "status": "disabled",
+    "lastSuccessAt": "2026-11-02 10:48:00",
+    "failCount": 6,
+    "owner": "何岚",
+    "publicOnlyConfirmed": true
+  }
+]

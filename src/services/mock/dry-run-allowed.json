@@ -1,0 +1,60 @@
+{
+  "robots": {
+    "allowed": true,
+    "rule": null,
+    "robotsUrl": "https://www.media.example.cn/robots.txt",
+    "body": "User-agent: *\nAllow: /\nDisallow: /admin\nCrawl-delay: 2"
+  },
+  "links": [
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n001.html",
+      "title": "示例资讯标题 01（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n002.html",
+      "title": "示例资讯标题 02（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n003.html",
+      "title": "示例资讯标题 03（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n004.html",
+      "title": "示例资讯标题 04（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n005.html",
+      "title": "示例资讯标题 05（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n006.html",
+      "title": "示例资讯标题 06（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n007.html",
+      "title": "示例资讯标题 07（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n008.html",
+      "title": "示例资讯标题 08（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n009.html",
+      "title": "示例资讯标题 09（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n010.html",
+      "title": "示例资讯标题 10（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n011.html",
+      "title": "示例资讯标题 11（虚构）"
+    },
+    {
+      "url": "https://www.media.example.cn/channel/industry/2026/n012.html",
+      "title": "示例资讯标题 12（虚构）"
+    }
+  ],
+  "parsedAt": "2026-11-27 22:31:00",
+  "durationMs": 842
+}

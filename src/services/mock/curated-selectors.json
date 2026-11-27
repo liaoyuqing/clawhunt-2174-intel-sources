@@ -1,0 +1,6 @@
+{
+  "list": "ul.news-list li",
+  "title": "a.news-title",
+  "date": "span.publish-date",
+  "summary": "p.digest"
+}

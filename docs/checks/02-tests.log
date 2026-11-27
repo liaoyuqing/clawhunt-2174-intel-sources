@@ -1,0 +1,63 @@
+$ npx vitest run --reporter=verbose
+
+
+ RUN  v3.2.7 E:/AI接单/Clawhunt/delivery/work/2174/clean
+
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 空串视为未覆盖，合法 2ms
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 合法对象返回键数与键值 0ms
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 语法错误报出 1 基行列位置 1ms
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 非对象（数组 / 字符串 / 数字）一律报 not-object 0ms
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 对象里出现非字符串值也拒绝，并指出键名 0ms
+ ✓ tests/json-validate.spec.ts > 选择器覆盖 JSON 校验 > 行列换算：locatorFromPosition 对多行文本给出正确的行与列 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 完全不在白名单：主机不在允许列表时报错并回传主机名 3ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 精确主机命中：gov.example.cn 通过，并回报命中的规则 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 备选口径反例：允许 example.cn 不放行 a.example.cn（不做隐式后缀匹配） 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 通配只匹配子域：*.example.cn 通过 a.example.cn 与 a.b.example.cn，不放行裸域 example.cn 0ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 端口不参与比较：带 :8443 与默认 443 都算同一 host 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 协议只允许 http / https：ftp 与 javascript 一律报 protocol-not-allowed 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > userinfo 混淆要拒绝：gov.example.cn@evil.example 与 user:pass@ 都报 credentials-not-allowed 1ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 归一化：大小写与尾部点在比较前折算，WWW.Example.CN. 视为 www.example.cn 0ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 空串与非法 URL 分别报 empty / invalid-url，不许当成「没填就不校验」 0ms
+ ✓ tests/host-match.spec.ts > AC1 入口地址主机必须落在允许主机内（纯函数 host-match） > 多条入口逐条独立判定：一条通过不影响另一条被拒 1ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > summarizeDryRun：12 条链接只取前 10 条，并写出「共解析 12 条，展示前 10 条」 2ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > summarizeDryRun：禁止样例给出「禁止抓取」与命中的规则 Disallow: /search 1ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > scenarioForUrl：biz.example.cn 走禁止样例，其余走允许样例 2ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > resolveDryRunScenario：?mock= 强制样例优先于主机推断，非法值回落推断 1ms
+ ✓ tests/fail-count.spec.tsx > AC4 连续失败次数 ≥ 3 的来源标红 > 阈值常量固定为 3，且 2 判 normal、3 判 alert、7 判 alert（边界各测一次） 2ms
+ ✓ tests/fail-count.spec.tsx > AC4 连续失败次数 ≥ 3 的来源标红 > 2 不红、3 红：data-fail-level 与内联颜色双通道同时可机检 62ms
+ ✓ tests/fail-count.spec.tsx > AC4 连续失败次数 ≥ 3 的来源标红 > 0 次显示灰色 0，且不显示「连续失败」角标 4ms
+ ✓ tests/fail-count.spec.tsx > AC4 连续失败次数 ≥ 3 的来源标红 > 列表里 3 与 2 并排：src-003（3 次）为 alert，src-002（2 次）为 normal，可直接对照 189ms
+ ✓ tests/fail-count.spec.tsx > AC4 连续失败次数 ≥ 3 的来源标红 > 状态为 disabled 的来源同样按失败次数标红（叠加条件不影响判定） 63ms
+ ✓ tests/filters.spec.tsx > 列表列、筛选与虚构数据 > 9 列表头与需求逐字一致（顺序也一致） 226ms
+ ✓ tests/filters.spec.tsx > 列表列、筛选与虚构数据 > 纯函数：类型 / 状态 / 地区层级三维度可组合过滤 1ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > staff 角色：新建按钮与所有行内编辑按钮都不渲染，列表照常渲染 259ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > supervisor 角色：新建按钮 1 个、每行编辑按钮 1 个 76ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > staff 即便把 ?edit=src-003 塞进地址，抽屉节点数量仍为 0（只读不是靠隐藏按钮） 57ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > staff 的试抓按钮也不可触达：抽屉根本不打开，页面无 dry-run 面板 49ms
+ ✓ tests/filters.spec.tsx > 列表列、筛选与虚构数据 > 界面筛选：切到「权威媒体」后表格只剩 media 行，计数同步刷新 309ms
+ ✓ tests/filters.spec.tsx > 列表列、筛选与虚构数据 > 最近成功时间为空的行显示「从未成功」 66ms
+ ✓ tests/filters.spec.tsx > 列表列、筛选与虚构数据 > 12 条 mock 全部虚构域名（*.example.cn），三种类型都覆盖，且没有真实个人信息字段 1ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > supervisor 下 ?edit=src-003 深链会打开对应来源的编辑抽屉（对照组，证明上一条不是测试假阴性） 146ms
+ ✓ tests/role-visibility.spec.tsx > AC3 非主管账号看不到新建与编辑按钮（只读视图） > 角色参数解析：supervisor 默认 / staff 简写 / 未知值回落主管；canWrite 只对主管为真 1ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > 允许场景：点「试抓」后结果区显示 robots 允许、链接总数 12、只渲染 10 条链接 694ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > 禁止场景：biz.example.cn 入口点试抓后显示「robots 禁止抓取」与命中规则 306ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > 链接可点击且带 target=_blank 与 rel=noopener noreferrer（安全断言） 278ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > 试抓前显示占位提示，试抓后面板保留输入（草稿未被清空） 266ms
+ ✓ tests/dry-run.spec.tsx > AC2 试抓结果区显示 robots 判定与前 10 条链接 > 试抓结果区的三元组可机检：判定 / 命中规则 / 链接总数（供 docs/checks/ac2-dryrun.log 复核） 265ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 入口地址主机不在允许主机内：该行立即报错、提交按钮禁用、改回允许主机后恢复 2778ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 多条入口逐条独立报错：第 1 条错误只标第 1 条，第 0 条保持通过 1042ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 未勾选「只采集公开信息」时保存禁用，勾选后解锁 308ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 允许主机标签输入：回车添加、× 删除、重复项去重并给提示 884ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 抓取频率下拉恰好 4 档且值为 hourly / 6h / daily / weekly 1ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 纯函数闸门：空草稿不可提交，逐项错误各就各位 1ms
+ ✓ tests/form-gate.spec.tsx > 抽屉表单：必填、逐条校验与提交闸门 > 选择器覆盖：折叠区默认收起，展开是 JSON 文本框，非法 JSON 报行内错误并阻止保存 444ms
+
+ Test Files  7 passed (7)
+      Tests  48 passed (48)
+   Start at  23:19:32
+   Duration  26.52s (transform 7.59s, setup 1.89s, collect 82.26s, tests 8.81s, environment 5.65s, prepare 1.02s)
+
+
+
+
+EXIT=0  DURATION=29.5s
